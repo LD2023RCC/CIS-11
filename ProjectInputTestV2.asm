@@ -272,17 +272,15 @@ CAL_MAX
 	ADD R2, R2, #1
 
 LOOP 	LDR R5, R2, #0		; Access pointer value in the array
-	NOT R4, R4
-	ADD R4, R4, #1
 	ADD R5, R5, R4
-	BRp NEXT
+	BRp POS
 	LEA R0, MAX
 	PUTS
 	LD R3, MAX_GRADE	; Load max grade
 	AND R1, R1, #0
 	OUT
 
-NEXT 	LDR R4, R2, #0
+POS 	LDR R4, R2, #0
 	ST R4, MAX_VALUE	; Store that new number as max grade
 	ADD R2, R2, #1		; The array moves to the next value
 	ADD R1, R1, #-1		; counter -1
@@ -293,7 +291,7 @@ NEXT 	LDR R4, R2, #0
 ;-------------------------Calculate Mingrade-----------------
 
 
-CAL_MAX
+CAL_MIN
 	LD R1, GRADE_COUNT 	; R1 holds the number of tests (5)
  	LEA R2, GRADES 		; R2 holds the array address
 	LD R4, GRADES		
@@ -301,10 +299,9 @@ CAL_MAX
 	ADD R2, R2, #1
 
 LOOP 	LDR R5, R2, #0		; Access pointer value in the array
-	NOT R4, R4
 	ADD R4, R4, #1
 	ADD R5, R5, R4
-	BRn NEXT
+	BRn NEG
 	LEA R0, MIN
 	PUTS
 	LD R3, MIN_GRADE	; Load min grade
@@ -312,7 +309,7 @@ LOOP 	LDR R5, R2, #0		; Access pointer value in the array
 	OUT
 
 
-NEXT 	LDR R4, R2, #0
+NEG 	LDR R4, R2, #0
 	ST R4, MIN_GRADE	; Store that new number as min grade
 	ADD R2, R2, #1		; The array moves to the next value
 	ADD R1, R1, #-1		; counter -1
